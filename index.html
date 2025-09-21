@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Days Until New Year</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: skyblue;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 20;
+      padding: 20px;
+    }
+  .container {
+      background-color: pink;
+      padding: 50px;
+      border-radius: 40px;
+      box-shadow: 0px 0px 10px gray;
+      text-align: center;
+      width: 320px;
+      border: 2px solid blue;
+    }
+
+
+    h1 {
+      font-size: 3.5em;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    input[type="date"] {
+      padding: 30px;
+      font-size: 2em;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 10px 10px;
+      font-size: 2em;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    #result {
+      margin-top: 25px;
+      font-size: 2em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<h1>📅 Days Until New Year</h1>
+<div class="container">
+  
+
+  <input type="date" id="userDate" /><br></br>
+  <button onclick="calculateDays()">Find day</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateDays() {
+      const input = document.getElementById("userDate").value;
+      if (!input) {
+        document.getElementById("result").textContent = "Please select a date.";
+        return;
+      }
+
+      const userDate = new Date(input);
+      const userYear = userDate.getFullYear();
+      const nextYear = userYear + 1;
+      const newYearDate = new Date(`January 1, ${nextYear} 00:00:00`);
+
+      const timeDiff = newYearDate - userDate;
+      const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+      if (daysLeft < 0) {
+        document.getElementById("result").textContent = "The selected date is already past New Year.";
+      } else {
+        document.getElementById("result").textContent = `${daysLeft} day${daysLeft !== 1 ? 's' : ''} left until January 1, ${nextYear}`;
+      }
+    }
+  </script>
+
+</body>
+</html>
